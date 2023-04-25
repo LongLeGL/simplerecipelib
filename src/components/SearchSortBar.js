@@ -77,6 +77,7 @@ function SearhSortBar({currentSearch}) {
                     id="search-tags-filled"
                     options={Tags.map((option) => option)}
                     value={recipeTags}
+                    inputValue=""   // prevent text input
                     renderTags={(value, getTagProps) =>
                         value.map((option, index) => (
                             <Chip variant="outlined" label={option} {...getTagProps({ index })} />

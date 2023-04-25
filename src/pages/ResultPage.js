@@ -64,7 +64,7 @@ function ResultPage() {
 					<div className="ResultListItem">
 						{results.map((item) => (
 							<div  className="Item">
-								<Link to= {`/ViewRecipe/${item.name}/${item.username}/${item.rating}`}>
+								<Link to= {`/ViewRecipe/${item.name}/${item.username}`}>
 									<h1>{item.name}</h1><br/>
 									<p>By: {item.username}</p>
 									<div style ={{display: 'flex', alignitem:'center', paddingTop:'0.5em', paddingBottom:'0.3em'}} >

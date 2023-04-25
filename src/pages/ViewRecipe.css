@@ -1,44 +1,76 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster+Two&family=Open+Sans:wght@400;600&display=swap');
 
-.ViewRecipe {
+.RecipeDisplay {
     padding-top: 9vh;
     background-color: var(--bg_gray);
     width: 100vw;
     height: 90vh;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
 }
 
-.main-bodypartv {
-    padding-top: 0;
-    margin: 36px;
-}
-
-.main-bodypartv h2 {
+.recipeName {
+    font-family: 'Lobster Two';
+    font-size: 3.5em;
     text-align: center;
-    margin-top: 10px;
-    
-    /* font-family: 'Open Sans', sans-serif; */
-
+    margin-top: 0.5em;
 }
 
-.ViewRecipe div {
-    align-items: center;
+.recipeAuthor {
+    font-family: 'Croissant One';
+    font-size: 2em;
+    text-align: center;
+    margin-top: 0.2em;
+}
+
+.recipeRating{
+    margin-top: 0.5em;
+    display: flex;
+    font-size: 0.6em;
     justify-content: center;
 }
-
-.ViewRecipe div h1 {
-    padding-right: 16px;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Lobster Two', cursive;
-    font-size: 3em;
+.recipeRating h1{
+    padding-top: 0.3em;
+    padding-right: 0.8em;
 }
 
-textarea:disabled { 
-    color: #000000;
+.recipeTags {
+    font-size: 1.2em;
+    margin: 1.5em 2vw 1em 2vw;
+}
+.recipeTags span {
+    margin: 0em 0.2em;
+    border: 1.5px solid var(--border_gray);
+    border-radius: 10px;
+    padding: 0.2em 0.5em;
+    background-color: azure;
+    color: rgb(17, 17, 17);
 }
 
-.Item{
-    height: fit-content;
+.recipeContent{
+    margin: 0em 5vh 5vw 5vw;
+    border: 3px solid var(--border_gray);
+    border-radius: 10px;
+    padding: 0.2em 1.2em;
+    background-color: aliceblue;
+}
+
+.recipeIngredients{
+    padding-top: 1em;
+}
+.recipeIngredients li{
+    margin-left: 1em;
+    padding-top: 0.5em;
+    font-size: 1.2em;
+}
+
+.recipeSteps{
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.recipeSteps p{
+    margin-left: 1em;
+    padding-top: 0.8em;
+    font-size: 1.2em;
 }

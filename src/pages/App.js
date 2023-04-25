@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path="*" element={<HomePage/>} exact='True' />
         <Route path="/Result/:key/:sortOpt/:tags" element={<ResultPage/>} />
-        {/* <Route path="/ViewRecipe/:recipeName/:userName" element={<ViewRecipe/>} exact='True' /> */}
+        <Route path="/ViewRecipe/:recipeName/:userName" element={<ViewRecipe/>} exact='True' />
         {/* should pass recipeID to viewing page instead */}
       </Routes>
     </React.Fragment>
