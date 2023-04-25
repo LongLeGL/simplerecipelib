@@ -1,0 +1,46 @@
+.HomePage{
+    padding-top: 10vh;
+    background-color: var(--bg_gray);
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+.NewRecipe{
+    margin: 2.2em auto;
+}
+.CreateRecipeBtn{
+    background-color: #C1839F;
+    font-size: 1.1em;
+    height: 2.2em;
+}
+.CreateRecipeBtn:disabled{
+    background-color: #e1ced7;
+    cursor: default;
+}
+
+.RecipeOfTheDay {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.RecipeOfTheDay #RecipeOfTheDay-header{
+    font-size: 20px;
+    margin-bottom: 15px;
+    
+}
+.RecipeOfTheDay #RecipeOfTheDay-panel{
+    background-color: white;
+    width: 40vw;
+    margin-bottom: 20px;    
+    border-color: var(--border_gray);
+    border-radius: 4px;
+    border-style: solid;    
+    display: flex;
+    flex-direction: column;
+    padding: 1em 1em;
+}
+

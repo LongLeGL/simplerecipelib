@@ -1,0 +1,9 @@
+.HomeContainer {
+    display: flex;
+    margin: 0 0;
+    width: 100vw;
+}
+
+.MainContent {
+    width: 70vw;
+}

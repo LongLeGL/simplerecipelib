@@ -1,0 +1,46 @@
+.ResultPage{
+    padding-top: 10vh;
+    background-color: var(--bg_gray);
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    /* overflow: auto; */
+}
+
+.ResultPage > .SearchSortBar{
+    margin-top: 25px;
+}
+.NoResultFound{
+    text-align: center;
+    font-size:40px;
+    color: var(--text_gray) ;
+}
+/* .ResultListItem{
+    margin:auto;
+    margin-top: 0px;
+    background-color: white;
+    width: 40vw;
+    margin-bottom: 20px;    
+    border-color: var(--border_gray);
+    border-radius: 4px;
+    border-style: solid;    
+    display: flex;
+    flex-direction: column;
+    padding: 1em 1em;
+
+} */
+.ResultListItem .Item{
+    
+    width: 70vw;
+    min-height: 14.5vh;
+    height: fit-content;
+    border: 2px var(--border_gray) solid;
+    border-radius: 8px;
+    margin: 1.5em auto;
+    padding: 0.5em 1em;
+    background-color: white;
+}
+
+.ResultRateStars{
+    padding-bottom: 1em;
+}

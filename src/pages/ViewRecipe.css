@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two&family=Open+Sans:wght@400;600&display=swap');
+
+.ViewRecipe {
+    padding-top: 9vh;
+    background-color: var(--bg_gray);
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-bodypartv {
+    padding-top: 0;
+    margin: 36px;
+}
+
+.main-bodypartv h2 {
+    text-align: center;
+    margin-top: 10px;
+    
+    /* font-family: 'Open Sans', sans-serif; */
+
+}
+
+.ViewRecipe div {
+    align-items: center;
+    justify-content: center;
+}
+
+.ViewRecipe div h1 {
+    padding-right: 16px;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lobster Two', cursive;
+    font-size: 3em;
+}
+
+textarea:disabled { 
+    color: #000000;
+}
+
+.Item{
+    height: fit-content;
+}

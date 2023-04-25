@@ -1,0 +1,55 @@
+.UpperBar {
+    width: 100vw;
+    height: 8vh;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-width: 1px;
+    border-color: var(--border_gray);
+    border-bottom-style: solid;
+    position: fixed;
+}
+
+.UpperbarHomeButton{
+    height: 6.6vh;
+    width: 6.6vh;
+    /* border: 2px var(--border_gray) solid; */
+    padding: 3px 3px;
+}
+.UpperbarHomeButton img{
+    width: 2.1em;
+    margin: 4px;
+}
+
+.UpperBarTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em;
+    gap: 1em;
+}
+.UpperBarTitle img{
+    width: 2.8em;
+}
+.UpperBarTitle h1{
+    font-family: 'Croissant One', cursive;
+}
+
+.BarLoginButton{
+    height: 5vh;
+    min-width: 8em;
+    width: fit-content;
+    max-width: 30em;
+    overflow:hidden;
+    background-color: white;
+    color: black;
+    border: 2.5px black solid;
+    border-radius: 20px;
+    font-size: 1.2em;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center; 
+    justify-content: center;
+    margin-right: 1em;
+}

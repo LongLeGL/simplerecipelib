@@ -1,0 +1,9 @@
+.ResultItem {
+    width: 70vw;
+    height: 20vh;
+    border: 2px var(--border_gray) solid;
+    border-radius: 8px;
+    margin: 1.5em auto;
+    padding: 0.5em 1em;
+    background-color: rgb(235, 240, 242);
+}
