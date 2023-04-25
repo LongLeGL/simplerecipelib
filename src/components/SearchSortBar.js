@@ -10,7 +10,12 @@ function SearhSortBar({currentSearch}) {
         // console.log("current search bar conditions:", currentSearch.key, currentSearch.sortOption, currentSearch.tags)
         setKey(currentSearch.key)
         setSort(currentSearch.sortOption)
-        setRecipeTags(currentSearch.tags)
+        if (currentSearch.tags[0] === 'noTags')  {
+            setRecipeTags([])
+            // console.log("Url give noTags, clearing 'noTags' from list")
+        }
+        else
+            setRecipeTags(currentSearch.tags)
     }, [currentSearch]);
     
 
@@ -30,8 +35,12 @@ function SearhSortBar({currentSearch}) {
         if(!key) seterrMsg("Recipe Name or Ingredients Required!")
         else if(!sort) seterrMsg("Please choose an Ordering option!")
         else{
-            // if ((recipeTags === []) setRecipeTags(['noTags'])
-            navigate(`/Result/${key}/${sort}/${recipeTags}`);
+            if (recipeTags.length === 0) {
+                // console.log("User chose no tags, navigating to /noTags page")
+                navigate(`/Result/${key}/${sort}/${['noTags']}`);
+            }
+            else
+                navigate(`/Result/${key}/${sort}/${recipeTags}`);
         }
     }
     
