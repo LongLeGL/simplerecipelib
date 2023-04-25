@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/simplerecipelib/static/css/main.39c601f2.css",
+    "main.js": "/simplerecipelib/static/js/main.d91bf132.js",
+    "static/js/498.940566f5.chunk.js": "/simplerecipelib/static/js/498.940566f5.chunk.js",
+    "static/js/703.131a7bd3.chunk.js": "/simplerecipelib/static/js/703.131a7bd3.chunk.js",
+    "static/js/513.4b15ff63.chunk.js": "/simplerecipelib/static/js/513.4b15ff63.chunk.js",
+    "static/media/logo.png": "/simplerecipelib/static/media/logo.c5a9968c8b2a06216e74.png",
+    "index.html": "/simplerecipelib/index.html",
+    "static/media/home.svg": "/simplerecipelib/static/media/home.d6e214db07cca646fa59851adebef8c1.svg",
+    "main.39c601f2.css.map": "/simplerecipelib/static/css/main.39c601f2.css.map",
+    "main.d91bf132.js.map": "/simplerecipelib/static/js/main.d91bf132.js.map",
+    "498.940566f5.chunk.js.map": "/simplerecipelib/static/js/498.940566f5.chunk.js.map",
+    "703.131a7bd3.chunk.js.map": "/simplerecipelib/static/js/703.131a7bd3.chunk.js.map",
+    "513.4b15ff63.chunk.js.map": "/simplerecipelib/static/js/513.4b15ff63.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.39c601f2.css",
+    "static/js/main.d91bf132.js"
+  ]
+}
