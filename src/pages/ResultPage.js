@@ -1,6 +1,6 @@
 import './ResultPage.css'
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {Link, useParams } from 'react-router-dom';
 import SearhSortBar from '../components/SearchSortBar';
 import { getRecipe } from "../firebase/database"
@@ -22,48 +22,62 @@ function getDateTime(UNIX_timestamp){		// convert timestamp to formated string
 
 function ResultPage() {
 	const { key, sortOpt, tags } = useParams();       // get passed search conditions from url
-	console.log("Result page received", key, sortOpt, tags)
+
+	useEffect(() => {
+		console.log("Query for result page:", key, sortOpt, tags)
+		if (tags === 'noTags')
+			searchRecipe(key, [], sortOpt)
+		else
+			searchRecipe(key, tags.split(','), sortOpt)
+	}, [key, sortOpt, tags]);
+
 
 	let sortBy;
-    if(sortOpt === "time"){    // convert sort condition string - code
-        sortBy = 0;
-    }
-    else if(sortOpt === "rating"){
+    if(sortOpt === "byTime"){    // convert sort condition string - code
         sortBy = 1;
+    }
+    else if(sortOpt === "byRating"){
+        sortBy = 0;
     } 
     else {
         sortBy = -1;
     }
 
-    // const searchRecipe = async (key, recipeTags, sortBy) => {     // get list of recipes
-    //     const result = await getRecipe(key, recipeTags, sortBy)  
-    //     setresults(result)
-    // }
+    const searchRecipe = async (key, recipeTags, sortBy) => {     // get list of recipes
+		// console.log("Querying for:", key, recipeTags, sortBy)
+        const result = await getRecipe(key, recipeTags, sortBy)
+		console.log("Backend retreived:", result)
+        setresults(result)
+    }
 
-	// const [results, setresults] = useState();
+	const [results, setresults] = useState([]);
 
 	return (
 		<div className = "ResultPage">
 			<SearhSortBar currentSearch={{key:key, sortOption:sortOpt, tags: tags.split(',')}}/>
 
-			{/* <div className='ResultsContainer'>
-				{(!results[0]) ? <div className="NoResultFound">No results found</div> : null}
-				<div className="ResultListItem">
-					{results.map((item) => (
-						<div  className="Item">
-							<Link to= {`/ViewRecipe/${item.name}/${item.username}/${item.rating}`}>
-								<h1>{item.name}</h1><br/>
-								<p>By: {item.username}</p>
-								<div style ={{display: 'flex', alignitem:'center', paddingTop:'0.5em', paddingBottom:'0.3em'}} >
-									<p>Rating: {item.rating?.toFixed(1)} </p>
-									<ReactStars count={1} size={15} color="#ffd700" className='ResultRateStars' />
-								</div>
-								<span className='CreatedTimeDisplay'>{getDateTime(item.createdTime)}</span>
-							</Link>
-						</div>))
-					}
-				</div>
-			</div> */}
+			<div className='ResultsContainer'>
+				{(results.length === 0) 
+				? 
+					<div className="NoResultFound">No results found</div> 
+				: 
+					<div className="ResultListItem">
+						{results.map((item) => (
+							<div  className="Item">
+								<Link to= {`/ViewRecipe/${item.name}/${item.username}/${item.rating}`}>
+									<h1>{item.name}</h1><br/>
+									<p>By: {item.username}</p>
+									<div style ={{display: 'flex', alignitem:'center', paddingTop:'0.5em', paddingBottom:'0.3em'}} >
+										<p>Rating: {item.rating?.toFixed(1)} </p>
+										<ReactStars count={1} size={15} color="#ffd700" className='ResultRateStars' />
+									</div>
+									<span className='CreatedTimeDisplay'>{getDateTime(item.createdTime)}</span>
+								</Link>
+							</div>))
+						}
+					</div>
+				}
+			</div>
 			
 		</div>
 	);
