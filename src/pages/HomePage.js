@@ -19,6 +19,7 @@ function HomePage() {
 				<ul>
 					<li>Search for a recipe by name by inputing name in the search bar</li>
 					<li>Search for a recipe by name along with an author name by inputing name:authorName in the search bar</li>
+					<li>You can also view information of an author by searching for :authorName</li>
 					<li>You can also include tags in the query by selecting one or many pre-defined tags</li>
 					<li>Result sorting order can also be specified, default ordering is by time</li>
 				</ul>

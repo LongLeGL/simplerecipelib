@@ -21,15 +21,16 @@ function getDateTime(UNIX_timestamp){		// convert timestamp to formated string
 }
 
 function ResultPage() {
-	const { key, sortOpt, tags } = useParams();       // get passed search conditions from url
+	const { name, author, sortOpt, tags } = useParams();       // get passed search conditions from url
+	let key = ((name === 'searchAuthor') ? '' : name) + ((author === 'noAuthor') ? '' : ':'+author)
 
 	useEffect(() => {
-		console.log("Query for result page:", key, sortOpt, tags)
+		console.log("Query for result page:", name, author, sortOpt, tags)
 		if (tags === 'noTags')
-			searchRecipe(key, [], sortOpt)
+			searchRecipe(name, [], sortOpt)
 		else
-			searchRecipe(key, tags.split(','), sortOpt)
-	}, [key, sortOpt, tags]);
+			searchRecipe(name, tags.split(','), sortOpt)
+	}, [name, author, sortOpt, tags]);
 
 
 	let sortBy;
@@ -43,9 +44,9 @@ function ResultPage() {
         sortBy = -1;
     }
 
-    const searchRecipe = async (key, recipeTags, sortBy) => {     // get list of recipes
-		// console.log("Querying for:", key, recipeTags, sortBy)
-        const result = await getRecipe(key, recipeTags, sortBy)
+    const searchRecipe = async (name, recipeTags, sortBy) => {     // get list of recipes
+		// console.log("Querying for:", name, recipeTags, sortBy)
+        const result = await getRecipe(name, recipeTags, sortBy)
 		console.log("Backend retreived:", result)
         setresults(result)
     }

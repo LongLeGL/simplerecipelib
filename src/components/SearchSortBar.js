@@ -35,12 +35,26 @@ function SearhSortBar({currentSearch}) {
         if(!key) seterrMsg("Recipe Name or Ingredients Required!")
         else if(!sort) seterrMsg("Please choose an Ordering option!")
         else{
+                let nameAuthor = key.split(':')
+                let searchName, searchAuthor = ''
+                if (nameAuthor.length === 1 || nameAuthor[1] === ''){   // no author provided
+                    searchName = nameAuthor[0]
+                    searchAuthor = 'noAuthor'
+                }
+                else if (nameAuthor.length === 2 && nameAuthor[0] === ''){  // search for author
+                    searchName = 'searchAuthor'
+                    searchAuthor = nameAuthor[1]
+                }
+                else{   // full form name:author
+                    searchName = nameAuthor[0]
+                    searchAuthor = nameAuthor[1]
+                }
             if (recipeTags.length === 0) {
                 // console.log("User chose no tags, navigating to /noTags page")
-                navigate(`/Result/${key}/${sort}/${['noTags']}`);
+                navigate(`/Result/${searchName}/${searchAuthor}/${sort}/${['noTags']}`);
             }
             else
-                navigate(`/Result/${key}/${sort}/${recipeTags}`);
+                navigate(`/Result/${searchName}/${searchAuthor}/${sort}/${recipeTags}`);
         }
     }
     

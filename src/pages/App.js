@@ -15,7 +15,7 @@ function App() {
       <UpperBar />
       <Routes>
         <Route path="*" element={<HomePage/>} exact='True' />
-        <Route path="/Result/:key/:sortOpt/:tags" element={<ResultPage/>} />
+        <Route path="/Result/:name/:author/:sortOpt/:tags" element={<ResultPage/>} />
         <Route path="/ViewRecipe/:recipeName/:userName" element={<ViewRecipe/>} exact='True' />
         {/* should pass recipeID to viewing page instead */}
       </Routes>
