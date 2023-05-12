@@ -71,13 +71,13 @@ function ResultPage() {
 		let queryURL = '';
 		if (recipeName != ''){			// recipe querying cases
 			console.log('=> Searching recipes:', recipeName, authorName, tags, orderOption)
-			if (authorName === '' && tags === []){
+			if (authorName === '' && tags.length === 0){
 				queryURL = `http://${host}:${port}/recipe?name=${recipeName}&order=${orderOption}`
 			}
-			else if (authorName != '' && tags === []){
+			else if (authorName != '' && tags.length === 0){
 				queryURL = `http://${host}:${port}/recipe?name=${recipeName}&author=${authorName}&order=${orderOption}`
 			}
-			else if (authorName === '' && tags != []){
+			else if (authorName === '' && tags.length > 0){
 				let tagsString = tags.join(',').replace(' ','%20')
 				queryURL = `http://${host}:${port}/recipe?name=${recipeName}&order=${orderOption}&tags=${tagsString}`
 			}	
