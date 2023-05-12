@@ -20,16 +20,39 @@ function getDateTime(UNIX_timestamp){		// convert timestamp to formated string
 	return time;
 }
 
+async function requestDb(url = "") {
+    // Default options are marked with *
+    console.log('Fetching database:', url)
+    const response = await fetch(url, {
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        // cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        // credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json",
+        	"Access-Control-Allow-Origin": "*",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        // redirect: "follow", // manual, *follow, error
+        // referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    });
+	const jsonData = response.json();
+    return jsonData; // parses JSON response into native JavaScript objects
+}
+
+const host = 'localhost'
+const port = 5000
+
 function ResultPage() {
 	const { name, author, sortOpt, tags } = useParams();       // get passed search conditions from url
-	let key = ((name === 'searchAuthor') ? '' : name) + ((author === 'noAuthor') ? '' : ':'+author)
+	let key = ((name === 'searchAuthor') ? '' : name) + ((author === 'noAuthor') ? '' : ':'+author)		// search bar's current conditions
 
 	useEffect(() => {
 		console.log("Query for result page:", name, author, sortOpt, tags)
-		if (tags === 'noTags')
-			searchRecipe(name, [], sortOpt)
-		else
-			searchRecipe(name, tags.split(','), sortOpt)
+		let authorArg = (author === 'noAuthor') ? '' : author
+		let tagsArg = (tags === 'noTags') ? [] : tags.split(',')
+		
+		searchRecipe(name, authorArg, tagsArg, sortOpt)
 	}, [name, author, sortOpt, tags]);
 
 
@@ -44,9 +67,33 @@ function ResultPage() {
         sortBy = -1;
     }
 
-    const searchRecipe = async (name, recipeTags, sortBy) => {     // get list of recipes
-		// console.log("Querying for:", name, recipeTags, sortBy)
-        const result = await getRecipe(name, recipeTags, sortBy)
+    const searchRecipe = async (recipeName, authorName, tags, orderOption) => {     // get list of recipes
+		let queryURL = '';
+		if (recipeName != ''){			// recipe querying cases
+			console.log('=> Searching recipes:', recipeName, authorName, tags, orderOption)
+			if (authorName === '' && tags === []){
+				queryURL = `http://${host}:${port}/recipe?name=${recipeName}&order=${orderOption}`
+			}
+			else if (authorName != '' && tags === []){
+				queryURL = `http://${host}:${port}/recipe?name=${recipeName}&author=${authorName}&order=${orderOption}`
+			}
+			else if (authorName === '' && tags != []){
+				let tagsString = tags.join(',').replace(' ','%20')
+				queryURL = `http://${host}:${port}/recipe?name=${recipeName}&order=${orderOption}&tags=${tagsString}`
+			}	
+			else {	// full info
+				let tagsString = tags.join(',').replace(' ','%20')
+				queryURL = `http://${host}:${port}/recipe?name=${recipeName}&author=${authorName}&order=${orderOption}&tags=${tagsString}`
+			}
+		}
+		else{							// author querying cases
+			console.log('=> Searching for author:', authorName)
+			queryURL = `http://${host}:${port}/`
+		}
+		
+		
+        // const result = await getRecipe(name, recipeTags, sortBy)
+		const result = await requestDb(queryURL)
 		console.log("Backend retreived:", result)
         setresults(result)
     }
@@ -64,15 +111,15 @@ function ResultPage() {
 				: 
 					<div className="ResultListItem">
 						{results.map((item) => (
-							<div  className="Item">
-								<Link to= {`/ViewRecipe/${item.name}/${item.username}`}>
+							<div className="Item">
+								<Link to= {`/ViewRecipe/${item.recipeId}`}>
 									<h1>{item.name}</h1><br/>
-									<p>By: {item.username}</p>
+									<p>By: {item.authorId}</p>
 									<div style ={{display: 'flex', alignitem:'center', paddingTop:'0.5em', paddingBottom:'0.3em'}} >
-										<p>Rating: {item.rating?.toFixed(1)} </p>
+										<p>Rating: {item.ratingScore?.toFixed(1)} </p>
 										<ReactStars count={1} size={15} color="#ffd700" className='ResultRateStars' />
 									</div>
-									<span className='CreatedTimeDisplay'>{getDateTime(item.createdTime)}</span>
+									<span className='CreatedTimeDisplay'>{getDateTime(item.addedTime)}</span>
 								</Link>
 							</div>))
 						}

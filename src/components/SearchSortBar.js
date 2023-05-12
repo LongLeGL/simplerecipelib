@@ -32,10 +32,13 @@ function SearhSortBar({currentSearch}) {
         //go to result page, pass conditions to that page. Searching is done in results page
         e.preventDefault();
         seterrMsg('');
+        let nameAuthor = key.split(':');
+
         if(!key) seterrMsg("Recipe Name or Ingredients Required!")
         else if(!sort) seterrMsg("Please choose an Ordering option!")
+        else if(nameAuthor.length > 2) seterrMsg("Please input only 1 name and 1 author with 1 : in between")
         else{
-                let nameAuthor = key.split(':')
+                
                 let searchName, searchAuthor = ''
                 if (nameAuthor.length === 1 || nameAuthor[1] === ''){   // no author provided
                     searchName = nameAuthor[0]
