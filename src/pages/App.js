@@ -7,6 +7,7 @@ import UpperBar from '../components/UpperBar';
 import ViewRecipe from './ViewRecipe';
 import HomePage from './HomePage';
 import ResultPage from './ResultPage';
+import ViewAuthor from './ViewAuthor'
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
         <Route path="*" element={<HomePage/>} exact='True' />
         <Route path="/Result/:name/:author/:sortOpt/:tags" element={<ResultPage/>} />
         <Route path="/ViewRecipe/:recipeId" element={<ViewRecipe/>} exact='True' />
-        {/* should pass recipeID to viewing page instead */}
+        <Route path="/ViewAuthor/:authorId" element={<ViewAuthor/>} exact='True' />
       </Routes>
     </React.Fragment>
   );

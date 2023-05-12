@@ -3,7 +3,7 @@ import './ViewRecipe.css';
 import ReactStars from "react-rating-stars-component";
 import { useState, useEffect } from 'react';
 import {  getRecipeByName } from "../firebase/database"
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 async function requestDb(url = "") {
     // Default options are marked with *
@@ -29,32 +29,34 @@ async function requestDb(url = "") {
 const host = 'localhost'
 const port = 5000
 
-function ViewRecipe() {
+function ViewAuthor() {
 
     // const [recommdedRecipeState, setrecommdedRecipeState] = useState(null);
-    const [displayRecipe, setdisplayRecipe] = useState();
+    const [displayauthor, setdisplayauthor] = useState();
 
-    const {recipeId} = useParams();       // get passed parameters from url
+    var {authorId} = useParams();       // get passed parameters from url
 
-    const getRecipe = async (recipeID) => {         // query with conditions from url parameter
-        let getRecURL = `http://${host}:${port}/recipe/${recipeID}`
-        const result = await requestDb(getRecURL);
+    const getauthor = async (authorID) => {         // query with conditions from url parameter
+        let getAuthorURL = `http://${host}:${port}/author/${authorId}`
+        const result = await requestDb(getAuthorURL);
         return result;
     }
 
     useEffect(() => {
-        getRecipe(recipeId).then(result => {
-            console.log("Retreived for display:", result)
-            setdisplayRecipe(result);
+        getauthor(authorId).then(result => {
+            console.log("Retreived author for display:", result)
+            setdisplayauthor(result);
         });
     }, [])
 
     return (
-        displayRecipe && <div className='RecipeDisplay'>
-            <div className='recipeName'>{displayRecipe.name}</div>
-            <Link to= {`/ViewAuthor/${displayRecipe.authorId}`}>
-                <div className='recipeAuthor'>By {displayRecipe.authorName}</div>
-            </Link>
+        displayauthor && <div className='RecipeDisplay'>
+            <div className='recipeAuthor'> {displayauthor.name} </div>
+            <div className='recipeRating'> <h1>ID: {displayauthor.authorId}</h1> </div>
+            <div className='recipeRating'><h1>Recipe count: {displayauthor.recipeCount} recipes posted.</h1></div>
+            <div className='recipeRating'><h1>Average recipe ratings: {displayauthor.avgRating}</h1></div>
+            {/* <div className='recipeName'>{displayRecipe.name}</div>
+            <div className='recipeAuthor'>By {displayRecipe.authorName}</div>
             <div className='recipeRating'>
                 <h1>Rating: </h1>
                 <ReactStars
@@ -81,9 +83,9 @@ function ViewRecipe() {
                 <h1>Instructions: </h1>
                     {displayRecipe.text.split(':::')[1].split('\\n').map((instr) => <p>{instr}</p>)}
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }
 
-export default ViewRecipe;
+export default ViewAuthor;

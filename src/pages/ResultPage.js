@@ -69,13 +69,14 @@ function ResultPage() {
 
     const searchRecipe = async (recipeName, authorName, tags, orderOption) => {     // get list of recipes
 		let queryURL = '';
-		if (recipeName != ''){			// recipe querying cases
+		if (recipeName != 'searchAuthor'){			// no recipe name provided
 			console.log('=> Searching recipes:', recipeName, authorName, tags, orderOption)
 			if (authorName === '' && tags.length === 0){
 				queryURL = `http://${host}:${port}/recipe?name=${recipeName}&order=${orderOption}`
 			}
 			else if (authorName != '' && tags.length === 0){
-				queryURL = `http://${host}:${port}/recipe?name=${recipeName}&author=${authorName}&order=${orderOption}`
+				let authorString = authorName.replace(' ','%20')
+				queryURL = `http://${host}:${port}/recipe?name=${recipeName}&author=${authorString}&order=${orderOption}`
 			}
 			else if (authorName === '' && tags.length > 0){
 				let tagsString = tags.join(',').replace(' ','%20')
@@ -83,12 +84,21 @@ function ResultPage() {
 			}	
 			else {	// full info
 				let tagsString = tags.join(',').replace(' ','%20')
-				queryURL = `http://${host}:${port}/recipe?name=${recipeName}&author=${authorName}&order=${orderOption}&tags=${tagsString}`
+				let authorString = authorName.replace(' ','%20')
+				queryURL = `http://${host}:${port}/recipe?name=${recipeName}&author=${authorString}&order=${orderOption}&tags=${tagsString}`
 			}
 		}
 		else{							// author querying cases
-			console.log('=> Searching for author:', authorName)
-			queryURL = `http://${host}:${port}/`
+			// console.log('=> Searching for author:', authorName)
+			// queryURL = `http://${host}:${port}/`
+			let authorString = authorName.replace(' ','%20')
+			if (tags.length === 0){
+				queryURL = `http://${host}:${port}/recipe?author=${authorString}&order=${orderOption}`
+			}
+			else{
+				let tagsString = tags.join(',').replace(' ','%20')
+				queryURL = `http://${host}:${port}/recipe?author=${authorString}&order=${orderOption}&tags=${tagsString}`
+			}
 		}
 		
 		
@@ -114,7 +124,7 @@ function ResultPage() {
 							<div className="Item">
 								<Link to= {`/ViewRecipe/${item.recipeId}`}>
 									<h1>{item.name}</h1><br/>
-									<p>By: {item.authorId}</p>
+									<p>By: {item.authorName}</p>
 									<div style ={{display: 'flex', alignitem:'center', paddingTop:'0.5em', paddingBottom:'0.3em'}} >
 										<p>Rating: {item.ratingScore?.toFixed(1)} </p>
 										<ReactStars count={1} size={15} color="#ffd700" className='ResultRateStars' />
